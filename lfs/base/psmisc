@@ -1,0 +1,18 @@
+#!/bin/bash
+
+. .before
+
+NAME=psmisc
+VERSION=23.1
+
+tar xf /import/sources/$NAME-$VERSION.tar.xz
+cd $NAME-$VERSION
+
+./configure --prefix=/usr
+
+make
+
+make install
+
+mv -v /usr/bin/fuser   /bin
+mv -v /usr/bin/killall /bin

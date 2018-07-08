@@ -1,0 +1,18 @@
+#!/bin/bash
+
+. .before
+
+NAME=mpfr
+VERSION=3.1.5
+
+tar xf /import/sources/$NAME-$VERSION.tar.xz
+cd $NAME-$VERSION
+
+./configure --prefix=/usr        \
+            --disable-static     \
+            --enable-thread-safe \
+            --docdir=/usr/share/doc/mpfr-$VERSION
+
+make
+
+make install

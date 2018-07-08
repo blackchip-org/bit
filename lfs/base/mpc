@@ -1,0 +1,17 @@
+#!/bin/bash
+
+. .before
+
+NAME=mpc
+VERSION=1.0.3
+
+tar xf /import/sources/$NAME-$VERSION.tar.gz
+cd $NAME-$VERSION
+
+./configure --prefix=/usr    \
+            --disable-static \
+            --docdir=/usr/share/doc/mpc-$VERSION
+
+make
+
+make install

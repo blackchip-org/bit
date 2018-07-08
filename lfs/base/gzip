@@ -1,0 +1,18 @@
+#!/bin/bash
+
+. .before
+
+NAME=gzip
+VERSION=1.8
+
+tar xf /import/sources/$NAME-$VERSION.tar.xz
+cd $NAME-$VERSION
+
+./configure --prefix=/usr
+
+make
+
+make install
+
+mv -v /usr/bin/gzip /bin
+

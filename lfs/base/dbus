@@ -1,0 +1,28 @@
+#!/bin/bash
+
+. .before
+
+NAME=dbus
+VERSION=1.10.22
+
+tar xf /import/sources/$NAME-$VERSION.tar.gz
+cd $NAME-$VERSION
+
+  ./configure --prefix=/usr                       \
+              --sysconfdir=/etc                   \
+              --localstatedir=/var                \
+              --disable-static                    \
+              --disable-doxygen-docs              \
+              --disable-xml-docs                  \
+              --docdir=/usr/share/doc/dbus-${VERSION} \
+              --with-console-auth-dir=/run/console
+
+make
+
+make install
+
+mv -v /usr/lib/libdbus-1.so.* /lib
+ln -sfv ../../lib/$(readlink /usr/lib/libdbus-1.so) /usr/lib/libdbus-1.so
+
+ln -sfv /etc/machine-id /var/lib/dbus
+

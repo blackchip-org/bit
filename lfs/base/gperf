@@ -1,0 +1,15 @@
+#!/bin/bash
+
+. .before
+
+NAME=gperf
+VERSION=3.1
+
+tar xf /import/sources/$NAME-$VERSION.tar.gz
+cd $NAME-$VERSION
+
+./configure --prefix=/usr --docdir=/usr/share/doc/gperf-3.1
+
+make
+
+make install

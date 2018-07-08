@@ -1,0 +1,15 @@
+#!/bin/bash
+
+. .before
+
+NAME=libpipeline
+VERSION=1.4.2
+
+tar xf /import/sources/$NAME-$VERSION.tar.gz
+cd $NAME-$VERSION
+
+PKG_CONFIG_PATH=/tools/lib/pkgconfig ./configure --prefix=/usr
+
+make
+
+make install

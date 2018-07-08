@@ -1,0 +1,18 @@
+#!/bin/bash
+
+. .before
+
+NAME=texinfo
+VERSION=6.4
+
+tar xf /import/sources/$NAME-$VERSION.tar.xz
+cd $NAME-$VERSION
+
+./configure --prefix=/usr --disable-static
+
+make
+
+make install
+
+make TEXMF=/usr/share/texmf install-tex
+

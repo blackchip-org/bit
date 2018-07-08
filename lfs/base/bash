@@ -1,0 +1,22 @@
+#!/bin/bash
+
+. .before
+
+NAME=bash
+VERSION=4.4
+
+tar xf /import/sources/$NAME-$VERSION.tar.gz
+cd $NAME-$VERSION
+
+patch -Np1 -i /import/sources/bash-4.4-upstream_fixes-1.patch
+
+./configure --prefix=/usr                       \
+            --docdir=/usr/share/doc/bash-$VERSION \
+            --without-bash-malloc               \
+            --with-installed-readline
+
+make
+
+make install
+mv -vf /usr/bin/bash /bin
+

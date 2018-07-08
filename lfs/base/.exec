@@ -1,0 +1,16 @@
+#!/bin/bash
+
+. ../.host
+
+TASK_NAME=$(basename $1)
+
+CHROOT=/export/root
+
+docker run \
+    --rm \
+    --privileged \
+    --mount type=bind,source=$WORK_DIR/export,target=/export \
+    --mount type=bind,source=$HERE/..,target=$CHROOT/import/plan,readonly \
+    --mount type=bind,source=$WORK_DIR/sources,target=$CHROOT/import/sources \
+    -t $PLAN \
+    /bin/bash -c "$CHROOT/import/plan/base/.chroot ./$TASK_NAME"

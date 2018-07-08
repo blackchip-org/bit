@@ -1,0 +1,15 @@
+#!/bin/bash
+
+. .before
+
+NAME=autoconf
+VERSION=2.69
+
+tar xf /import/sources/$NAME-$VERSION.tar.xz
+cd $NAME-$VERSION
+
+./configure --prefix=/usr
+
+make
+
+make install

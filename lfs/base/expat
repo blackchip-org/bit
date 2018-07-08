@@ -1,0 +1,17 @@
+#!/bin/bash
+
+. .before
+
+NAME=expat
+VERSION=2.2.3
+
+tar xf /import/sources/$NAME-$VERSION.tar.bz2
+cd $NAME-$VERSION
+
+sed -i 's|usr/bin/env |bin/|' run.sh.in
+
+./configure --prefix=/usr --disable-static
+
+make
+
+make install

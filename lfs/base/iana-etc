@@ -1,0 +1,13 @@
+#!/bin/bash
+
+. .before
+
+NAME=iana-etc
+VERSION=2.30
+
+tar xf /import/sources/$NAME-$VERSION.tar.bz2
+cd $NAME-$VERSION
+
+make
+
+make install

@@ -1,0 +1,19 @@
+#!/bin/bash
+
+. .before
+
+NAME=gmp
+VERSION=6.1.2
+
+tar xf /import/sources/$NAME-$VERSION.tar.xz
+cd $NAME-$VERSION
+
+./configure --prefix=/usr    \
+            --enable-cxx     \
+            --disable-static \
+            --docdir=/usr/share/doc/gmp-$VERSION
+
+make
+
+make install
+

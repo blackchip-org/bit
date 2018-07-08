@@ -1,0 +1,19 @@
+#!/bin/bash
+
+. .before
+
+NAME=zlib
+VERSION=1.2.11
+
+tar xf /import/sources/$NAME-$VERSION.tar.xz
+cd $NAME-$VERSION
+
+./configure --prefix=/usr
+
+make
+
+make install
+
+mv -v /usr/lib/libz.so.* /lib
+ln -sfv ../../lib/$(readlink /usr/lib/libz.so) /usr/lib/libz.so
+

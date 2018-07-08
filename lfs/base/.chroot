@@ -1,0 +1,22 @@
+#!/bin/bash
+
+set +e
+
+CHROOT=/export/root
+
+mount --bind /dev $CHROOT/dev
+mount -t devpts devpts $CHROOT/dev/pts -o gid=5,mode=620
+mount -t proc proc $CHROOT/proc
+mount -t sysfs sysfs $CHROOT/sys
+mount -t tmpfs tmpfs $CHROOT/run
+
+chroot $CHROOT /bin/bash -c "cd /import/plan/base && $1"
+rc=$?
+
+umount $CHROOT/run
+umount $CHROOT/sys
+umount $CHROOT/proc
+umount $CHROOT/dev/pts
+umount $CHROOT/dev
+
+exit $rc

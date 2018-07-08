@@ -1,0 +1,15 @@
+#!/bin/bash
+
+. .before
+
+NAME=linux
+VERSION=4.12.7
+
+tar xf /import/sources/$NAME-$VERSION.tar.xz
+cd $NAME-$VERSION
+
+make mrproper
+
+make INSTALL_HDR_PATH=dest headers_install
+find dest/include \( -name .install -o -name ..install.cmd \) -delete
+cp -rv dest/include/* /usr/include

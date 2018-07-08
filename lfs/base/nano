@@ -1,0 +1,18 @@
+#!/bin/bash
+
+. .before
+
+NAME=nano
+VERSION=2.8.7
+
+tar xf /import/sources/$NAME-$VERSION.tar.xz
+cd $NAME-$VERSION
+
+./configure --prefix=/usr     \
+            --sysconfdir=/etc \
+            --enable-utf8     \
+            --docdir=/usr/share/doc/nano-2.8.7 &&
+make
+
+make install &&
+install -v -m644 doc/{nano.html,sample.nanorc} /usr/share/doc/nano-2.8.7

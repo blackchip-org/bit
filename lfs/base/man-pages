@@ -1,0 +1,11 @@
+#!/bin/bash
+
+. .before
+
+NAME=man-pages
+VERSION=4.12
+
+tar xf /import/sources/$NAME-$VERSION.tar.xz
+cd $NAME-$VERSION
+
+make install

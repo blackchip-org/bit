@@ -1,0 +1,15 @@
+#!/bin/bash
+
+. .before
+
+NAME=diffutils
+VERSION=3.6
+
+tar xf /import/sources/$NAME-$VERSION.tar.xz
+cd $NAME-$VERSION
+
+./configure --prefix=/usr
+
+make
+
+make install

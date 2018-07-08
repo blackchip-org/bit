@@ -1,0 +1,18 @@
+#!/bin/bash
+
+. .before
+
+NAME=findutils
+VERSION=4.6.0
+
+tar xf /import/sources/$NAME-$VERSION.tar.gz
+cd $NAME-$VERSION
+
+./configure --prefix=/usr --localstatedir=/var/lib/locate
+
+make
+
+make install
+
+mv -v /usr/bin/find /bin
+sed -i 's|find:=${BINDIR}|find:=/bin|' /usr/bin/updatedb

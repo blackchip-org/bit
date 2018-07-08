@@ -1,0 +1,20 @@
+#!/bin/bash
+
+. .before
+
+NAME=grub
+VERSION=2.02
+
+tar xf /import/sources/$NAME-$VERSION.tar.xz
+cd $NAME-$VERSION
+
+./configure --prefix=/usr          \
+            --sbindir=/sbin        \
+            --sysconfdir=/etc      \
+            --disable-efiemu       \
+            --disable-werror
+
+make
+
+make install
+

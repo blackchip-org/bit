@@ -1,0 +1,15 @@
+#!/bin/bash
+
+. .before
+
+NAME=XML-Parser
+VERSION=2.44
+
+tar xf /import/sources/$NAME-$VERSION.tar.gz
+cd $NAME-$VERSION
+
+perl Makefile.PL
+
+make
+
+make install

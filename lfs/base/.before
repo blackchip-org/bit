@@ -1,0 +1,13 @@
+#!/bin/bash
+
+. ../.docker
+
+export HOME=/root
+export PATH=/bin:/usr/bin:/sbin:/usr/sbin:/tools/bin
+set +h
+
+rm -rf /tmp/build
+mkdir -p /tmp/build
+cd /tmp/build
+
+set -e -x
