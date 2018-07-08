@@ -1,0 +1,15 @@
+#!/bin/bash
+
+. .before
+
+NAME=grep
+VERSION=3.1
+
+tar xf /import/sources/$NAME-$VERSION.tar.xz
+cd $NAME-$VERSION
+
+./configure --prefix=/tools
+
+make
+
+make install

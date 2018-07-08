@@ -1,0 +1,4 @@
+#!/bin/bash
+
+/bin/echo dog
+sleep 1

@@ -1,0 +1,5 @@
+#!/bin/bash
+
+. .before
+
+docker build -t $PLAN $HERE

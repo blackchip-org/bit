@@ -1,0 +1,16 @@
+#!/bin/bash
+
+. .before
+
+NAME=gzip
+VERSION=1.8
+
+tar xf /import/sources/$NAME-$VERSION.tar.xz
+cd $NAME-$VERSION
+
+./configure --prefix=/tools
+
+make
+
+make install
+

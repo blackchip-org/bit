@@ -1,0 +1,17 @@
+#!/bin/bash
+
+. .before
+
+NAME=tar
+VERSION=1.29
+
+export FORCE_UNSAFE_CONFIGURE=1
+
+tar xf /import/sources/$NAME-$VERSION.tar.xz
+cd $NAME-$VERSION
+
+./configure --prefix=/tools
+
+make
+
+make install

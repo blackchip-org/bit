@@ -1,0 +1,22 @@
+#!/bin/bash
+
+. .before
+
+NAME=ncurses
+VERSION=6.0
+
+tar xf /import/sources/$NAME-$VERSION.tar.gz
+cd $NAME-$VERSION
+
+sed -i s/mawk// configure
+
+./configure --prefix=/tools \
+            --with-shared   \
+            --without-debug \
+            --without-ada   \
+            --enable-widec  \
+            --enable-overwrite
+
+make
+
+make install

@@ -1,0 +1,18 @@
+#!/bin/bash
+
+. .before
+
+NAME=coreutils
+VERSION=8.27
+
+# Allow build as root
+export FORCE_UNSAFE_CONFIGURE=1
+
+tar xf /import/sources/$NAME-$VERSION.tar.xz
+cd $NAME-$VERSION
+
+./configure --prefix=/tools --enable-install-program=hostname
+
+make
+
+make install

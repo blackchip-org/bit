@@ -1,0 +1,68 @@
+#!/bin/bash
+
+. .before
+
+NAME=gcc
+VERSION=7.2.0
+
+MPFR_VERSION=3.1.5
+GMP_VERSION=6.1.2
+MPC_VERSION=1.0.3
+
+tar xf /import/sources/$NAME-$VERSION.tar.xz
+cd $NAME-$VERSION
+
+cat gcc/limitx.h gcc/glimits.h gcc/limity.h > \
+  `dirname $($LFS_TGT-gcc -print-libgcc-file-name)`/include-fixed/limits.h
+
+for file in gcc/config/{linux,i386/linux{,64}}.h
+do
+  cp -uv $file{,.orig}
+  sed -e 's@/lib\(64\)\?\(32\)\?/ld@/tools&@g' \
+      -e 's@/usr@/tools@g' $file.orig > $file
+  echo '
+#undef STANDARD_STARTFILE_PREFIX_1
+#undef STANDARD_STARTFILE_PREFIX_2
+#define STANDARD_STARTFILE_PREFIX_1 "/tools/lib/"
+#define STANDARD_STARTFILE_PREFIX_2 ""' >> $file
+  touch $file.orig
+done
+
+sed -e '/m64=/s/lib64/lib/' \
+    -i.orig gcc/config/i386/t-linux64
+
+tar xf /import/sources/mpfr-${MPFR_VERSION}.tar.xz
+mv mpfr-${MPFR_VERSION} mpfr
+tar xf /import/sources/gmp-${GMP_VERSION}.tar.xz
+mv gmp-${GMP_VERSION} gmp
+tar xf /import/sources/mpc-${MPC_VERSION}.tar.gz
+mv mpc-${MPC_VERSION} mpc
+
+mkdir -v build
+cd       build
+
+CC=$LFS_TGT-gcc                                    \
+CXX=$LFS_TGT-g++                                   \
+AR=$LFS_TGT-ar                                     \
+RANLIB=$LFS_TGT-ranlib                             \
+../configure                                       \
+    --prefix=/tools                                \
+    --with-local-prefix=/tools                     \
+    --with-native-system-header-dir=/tools/include \
+    --enable-languages=c,c++                       \
+    --disable-libstdcxx-pch                        \
+    --disable-multilib                             \
+    --disable-bootstrap                            \
+    --disable-libgomp
+
+make
+
+make install
+
+ln -sv gcc /tools/bin/cc
+
+echo 'int main(){}' > dummy.c
+cc dummy.c
+readelf -l a.out | grep ': /tools'
+rm -v dummy.c a.out
+

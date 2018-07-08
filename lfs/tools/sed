@@ -1,0 +1,15 @@
+#!/bin/bash
+
+. .before
+
+NAME=sed
+VERSION=4.4
+
+tar xf /import/sources/$NAME-$VERSION.tar.xz
+cd $NAME-$VERSION
+
+./configure --prefix=/tools
+
+make
+
+make install

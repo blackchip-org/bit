@@ -1,0 +1,17 @@
+#!/bin/bash
+
+. .before
+
+NAME=bash
+VERSION=4.4
+
+tar xf /import/sources/$NAME-$VERSION.tar.gz
+cd $NAME-$VERSION
+
+./configure --prefix=/tools --without-bash-malloc
+
+make
+
+make install
+
+ln -sv bash /tools/bin/sh

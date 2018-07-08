@@ -1,0 +1,3 @@
+#!/bin/bash
+
+/bin/echo "About to count some numbers..."

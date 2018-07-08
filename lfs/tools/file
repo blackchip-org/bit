@@ -1,0 +1,15 @@
+#!/bin/bash
+
+. .before
+
+NAME=file
+VERSION=5.31
+
+tar xf /import/sources/$NAME-$VERSION.tar.gz
+cd $NAME-$VERSION
+
+./configure --prefix=/tools
+
+make
+
+make install

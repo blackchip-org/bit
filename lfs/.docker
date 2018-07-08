@@ -1,0 +1,6 @@
+#!/bin/bash
+
+NPROC=/usr/bin/nproc
+[ -e $NPROC ] || NPROC=/tools/bin/nproc
+let MAXJOBS=$($NPROC --all)*2
+export MAKEFLAGS="-j$MAXJOBS -l$MAXJOBS"

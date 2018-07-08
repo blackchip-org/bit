@@ -1,0 +1,8 @@
+#!/bin/bash
+
+/bin/echo dog
+sleep 1
+/bin/echo cat
+sleep 1
+/bin/echo mouse
+sleep 1

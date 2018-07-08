@@ -1,0 +1,13 @@
+#!/bin/bash
+
+. .before
+
+NAME=dejagnu
+VERSION=1.6
+
+tar xf /import/sources/$NAME-$VERSION.tar.gz
+cd $NAME-$VERSION
+
+./configure --prefix=/tools
+
+make install

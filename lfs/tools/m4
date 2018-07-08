@@ -1,0 +1,15 @@
+#!/bin/bash
+
+. .before
+
+NAME=m4
+VERSION=1.4.18
+
+tar xf /import/sources/$NAME-$VERSION.tar.xz
+cd $NAME-$VERSION
+
+./configure --prefix=/tools
+
+make
+
+make install

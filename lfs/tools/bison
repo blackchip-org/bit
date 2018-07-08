@@ -1,0 +1,15 @@
+#!/bin/bash
+
+. .before
+
+NAME=bison
+VERSION=3.0.4
+
+tar xf /import/sources/$NAME-$VERSION.tar.xz
+cd $NAME-$VERSION
+
+./configure --prefix=/tools
+
+make
+
+make install

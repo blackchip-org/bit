@@ -1,0 +1,18 @@
+#!/bin/bash
+
+. ../.host
+
+mkdir -p $WORK_DIR/export
+
+TASK_NAME=$(basename $1)
+
+docker run \
+    --rm \
+    --privileged \
+    --mount type=bind,source=$HERE/..,target=/import/plan,readonly \
+    --mount type=bind,source=$WORK_DIR/sources,target=/import/sources \
+    --mount type=bind,source=$WORK_DIR/export,target=/export \
+    -t $PLAN \
+    /bin/bash -c "cd /import/plan/tools && ./$TASK_NAME"
+
+

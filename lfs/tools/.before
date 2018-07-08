@@ -1,0 +1,23 @@
+#!/bin/bash
+
+. ../.docker
+
+set +h
+umask 022
+LFS=/export/root
+LC_ALL=POSIX
+LFS_TGT=$(uname -m)-lfs-linux-gnu
+PATH=/tools/bin:/bin:/usr/bin
+export LFS LC_ALL LFS_TGT PATH
+
+set -e
+
+rm -rf /tmp/build
+mkdir -p /tmp/build
+cd /tmp/build
+
+mkdir -p $LFS/tools
+ln -sf $LFS/tools /tools
+
+set -x
+

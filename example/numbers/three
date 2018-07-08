@@ -1,0 +1,12 @@
+#!/bin/bash
+
+. .before
+
+/bin/echo "one"
+sleep 1
+/bin/echo "two"
+sleep 1
+/bin/echo "three"
+sleep 1
+
+. .after

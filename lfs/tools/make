@@ -1,0 +1,15 @@
+#!/bin/bash
+
+. .before
+
+NAME=make
+VERSION=4.2.1
+
+tar xf /import/sources/$NAME-$VERSION.tar.bz2
+cd $NAME-$VERSION
+
+./configure --prefix=/tools --without-guile
+
+make
+
+make install
