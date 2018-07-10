@@ -5,5 +5,9 @@
 mkdir -p sources
 cd sources
 
-wget --timestamping --no-verbose --input-file $HERE/$PLAN.wget
+wget \
+    --timestamping \
+    --no-verbose \
+    --no-check-certificate \
+    --input-file $HERE/$PLAN.wget
 md5sum -c $HERE/$PLAN.md5

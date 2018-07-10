@@ -9,3 +9,7 @@ RUN apt-get install -y \
     gawk \
     wget
 RUN update-alternatives --install /bin/sh sh /bin/bash 100
+
+RUN mkdir -p /import/plan && \
+    mkdir /import/sources && \
+    mkdir /export

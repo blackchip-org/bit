@@ -77,6 +77,7 @@ func (m *Monitor) Run() {
 
 func (m *Monitor) Stop() {
 	m.stop <- true
+	m.flushOutput()
 	m.printStatusLine(AnsiGreen)
 	fmt.Fprintln(m.out)
 	m.resetTerminal()
@@ -84,6 +85,7 @@ func (m *Monitor) Stop() {
 
 func (m *Monitor) Error() {
 	m.stop <- true
+	m.flushOutput()
 	m.printStatusLine(AnsiRed)
 	fmt.Fprintln(m.out)
 	m.resetTerminal()
@@ -154,7 +156,8 @@ func (m *Monitor) signalHandler(sig chan os.Signal) {
 }
 
 func (m *Monitor) resetTerminal() {
-	fmt.Fprint(m.out, AnsiCursorOn+"\n")
+	fmt.Fprint(m.out, AnsiCursorOn)
+	fmt.Fprintf(m.out, AnsiReset)
 }
 
 // https://stackoverflow.com/questions/16569433/get-terminal-size-in-go
